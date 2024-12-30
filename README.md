@@ -30,6 +30,16 @@ How to install Kutty: https://kutty.netlify.app/docs/
 
 Debug is set to True and allowed hosts haven't been set in the settings.py file.
 
+## API, secret keys in the .env file
+
+You will need:
+
+- EMAIL_HOST_USER
+- EMAIL_HOST_PASSWORD
+
+- STRIPE_SECRET_KEY
+- STRIPE_ENDPOINT_SECRET
+
 ## Tech stack
 
 - Django
