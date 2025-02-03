@@ -10,19 +10,26 @@ from django.contrib import messages
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
 def index(request):
-    # Lifetime access
-    product_id = 'prod_RSqCMVYlUtP34h'
+    # Product 1
+    product_id = settings.TEST_PRODUCT_ID_1
     product = stripe.Product.retrieve(product_id)
     prices = stripe.Price.list(product=product_id)
     price = prices.data[0]
     product_price = price.unit_amount / 100
 
+    # Product 2
+    product_2_id = settings.TEST_PRODUCT_ID_2
+    product_2 = stripe.Product.retrieve(product_2_id)
+    prices_2 = stripe.Price.list(product=product_2_id)
+    price_2 = prices_2.data[0]
+    product_2_price = price_2.unit_amount / 100
+
     # Subscription
-    sub_product_id = 'prod_RT5LsY8GOdMCQi'
-    sub_product = stripe.Product.retrieve(sub_product_id)
-    prices = stripe.Price.list(product=sub_product_id)
-    sub_price = prices.data[0]
-    sub_product_price = sub_price.unit_amount / 100
+    # sub_product_id = 'prod_RT5LsY8GOdMCQi'
+    # sub_product = stripe.Product.retrieve(sub_product_id)
+    # prices = stripe.Price.list(product=sub_product_id)
+    # sub_price = prices.data[0]
+    # sub_product_price = sub_price.unit_amount / 100
 
     if request.method == "POST":
         if not request.user.is_authenticated:
@@ -59,9 +66,9 @@ def index(request):
 
     return render(request, 'core/index.html', {
         'product': product,
-        'sub_product': sub_product,
+        'product_2': product_2,
         'price': product_price,
-        'sub_price': sub_product_price,
+        'price_2': product_2_price,
     })
 
 def payment_successful(request):

@@ -139,12 +139,12 @@
       >
         <div class="flex flex-col justify-between p-6 border-b border-gray-200">
           <p class="mb-1 text-lg font-semibold text-yellow-600">
-            {{ sub_product.name }}
+            {{ product_2.name }}
           </p>
           <p class="pb-0 my-2 font-mono text-4xl font-extrabold text-white-900">
-            ${{ sub_price }}
+            ${{ price_2 }}
           </p>
-          <p class="text-sm text-gray-500">Organization / month</p>
+          <p class="text-sm text-gray-500">One-off payment</p>
           <form method="post">
             {% csrf_token %}
             <input

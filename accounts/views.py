@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, reverse
-from core.models import Subscription
+from core.models import UserPayment
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.contrib import messages
@@ -10,10 +10,10 @@ def profile(request):
     if not request.user.is_authenticated:
         return redirect(f'{settings.BASE_URL}{reverse("account_login")}?next={request.get_full_path()}')
 
-    subscriptions = Subscription.objects.filter(user=request.user).first()
+    user_payment = UserPayment.objects.filter(user=request.user).first()
 
     return render(request, 'account/profile.html', {
-        'subscriptions': subscriptions,
+        'user_payment': user_payment,
     })
 
 def check_username(request):

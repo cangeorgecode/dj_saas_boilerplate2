@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'accounts',
     'core', 
     "django_htmx",
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.github',
 ]
 
 TAILWIND_APP_NAME = 'theme'
@@ -59,10 +61,18 @@ MIDDLEWARE = [
     "django_htmx.middleware.HtmxMiddleware",
 ]
 
+LOGIN_REDIRECT_URL = '/'
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
+
+SOCIALACCOUNT_PROVIDERS = {
+
+}
 
 ROOT_URLCONF = 'proj.urls'
 
@@ -148,7 +158,7 @@ MEDIA_URL = '/media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST = 'smtp.porkbun.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER') 
@@ -158,3 +168,5 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY')
 STRIPE_ENDPOINT_SECRET = os.getenv('STRIPE_ENDPOINT_SECRET')
+TEST_PRODUCT_ID_1 = os.getenv('TEST_PRODUCT_ID_1')
+TEST_PRODUCT_ID_2 = os.getenv('TEST_PRODUCT_ID_2')
