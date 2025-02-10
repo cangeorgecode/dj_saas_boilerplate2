@@ -1,20 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.timezone import now
-
-class UserPayment(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    stripe_customer_id = models.CharField(max_length=255)
-    stripe_checkout_id = models.CharField(max_length=255)
-    stripe_product_id = models.CharField(max_length=255)
-    product_name = models.CharField(max_length=255)
-    quantity = models.IntegerField(default=1)
-    price = models.DecimalField(max_digits=10, decimal_places=2)
-    currency = models.CharField(max_length=3)
-    has_paid = models.BooleanField(default=False)
-
-    def __str__(self):
-        return f"{self.user.username} - {self.product_name} - Paid: {self.price}"
+from dateutil.relativedelta import relativedelta
 
 class Subscription(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -40,10 +27,23 @@ class Subscription(models.Model):
     @property
     def tier(self):
         tier_mapping = {
-            'Test Product 3': 1,
+            'Test_subs_1': 1, # The product name follows that of the Stripe product
+            'Test_subs_2': 2,
         }
         tier = tier_mapping.get(self.product_name, None)
         return tier
 
     def __str__(self):
         return f"{self.user.username} - {self.product_name} - Active: {self.is_active}"
+
+    def next_billing_date(self):
+        if self.is_active:
+            if self.interval == 'month':
+                next_billing_date = self.start_date + relativedelta(months=1)
+            elif self.interval == 'year':
+                next_billing_date = self.start_date + relativedelta(years=1)
+            else:
+                next_billing_date = self.start_date + relativedelta(days=7)
+        else:
+            next_billing_date = None
+        return next_billing_date

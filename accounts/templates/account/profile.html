@@ -13,13 +13,26 @@
       <span class="text-sm text-gray-500 dark:text-gray-400"
         >{{ user.email }}</span
       >
-      {% if user_payment %}
+      {% if user_subs %}
       <span class="text-sm text-gray-500 dark:text-gray-400"
-        >Your purchase: {{ user_payment.product_name }}
+        >You are subscribed to: {{ user_subs.product_name }}
       </span>
+
+        {% if user_subs.is_active and not user_subs.end_date %}
+        <span class="text-sm text-gray-500 dark:text-gray-400"
+        >Recurring Payment: ${{ user_subs.price }} / {{ user_subs.interval }}
+        </span>
+        <span class="text-sm text-gray-500 dark:text-gray-400"
+        >Next Payment Date: {{ user_subs.next_billing_date | date:"F j, Y" }}
+        </span>
+        {% else %}
+        <span class="text-sm text-gray-500 dark:text-gray-400"
+        >Cancelled. End Date: {{ user_subs.end_date | date:"F j, Y" }}
+        </span>
+        {% endif %}
       {% else %}
       <span class="text-sm text-gray-500 dark:text-gray-400"
-        >You haven't made a purchase yet, help a brother out!
+        >You are on the free tier
       </span>
       {% endif %}
       <div class="flex mt-4 md:mt-6">
@@ -30,6 +43,14 @@
         >
 
       </div>
+           {% if user_subs.is_active and not user_subs.end_date %}
+      <form method="POST" action="{% url 'cancel_subscription' user_subs.stripe_subscription_id %}">
+        {% csrf_token %}
+        <button class="btn btn-danger">Cancel subscription</button>
+      </form>
+      {% endif %}
+      <br>
+      <a href="{% url 'pricing' %}" type="button" class="btn btn-warning">Switch Plan</a>
     </div>
   </div>
 </div>

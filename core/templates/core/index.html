@@ -139,25 +139,26 @@
       >
         <div class="flex flex-col justify-between p-6 border-b border-gray-200">
           <p class="mb-1 text-lg font-semibold text-yellow-600">
-            {{ product_2.name }}
+            {{ subscription.test_product_1.name }}
           </p>
           <p class="pb-0 my-2 font-mono text-4xl font-extrabold text-white-900">
-            ${{ price_2 }}
+            ${{ subscription.product_1_price }}
           </p>
-          <p class="text-sm text-gray-500">One-off payment</p>
+          <p class="text-sm text-gray-500">per month</p>
           <form method="post">
             {% csrf_token %}
             <input
               type="hidden"
               name="price_id"
-              value="price_1Qa9AdLPvA7oTA85HQs1L7aM"
+              value="price_1QqmTELPvA7oTA85A8HIsYni"
             />
             <input type="hidden" name="mode" value="subscription" />
             <button type="submit" class="w-full mt-6 btn btn-warning btn-lg">
-              Get started for free &rarr;
+              Subscribe &rarr;
             </button>
           </form>
         </div>
+        <!-- Tier features -->
         <ul class="flex flex-col flex-grow p-6 space-y-3">
           <li class="flex items-start">
             <svg
@@ -334,29 +335,29 @@
           <div>
             <div class="flex items-center justify-between">
               <p class="mb-1 text-lg font-semibold text-purple-700">
-                {{ product.name }}
+                {{ subscription.test_product_2.name }}
               </p>
               <span class="badge bg-primary-light text-primary"
                 >Most popular</span
               >
             </div>
             <p class="my-2 font-mono text-4xl font-extrabold text-gray-900">
-              ${{ price }}
+              ${{ subscription.product_2_price }}
             </p>
-            <p class="text-sm text-gray-500">Lifetime Access</p>
+            <p class="text-sm text-gray-500">Per Month</p>
           </div>
           <form method="post">
             {% csrf_token %}
             <input
               type="hidden"
               name="price_id"
-              value="price_1QZvV0LPvA7oTA85wlCFeOcE"
+              value="price_1QqmSTLPvA7oTA856r6OqpFc"
             />
             <!-- <input type="hidden" name="quantity" value="1" /> -->
             <input type="hidden" name="mode" value="payment" />
 
             <button type="submit" class="w-full mt-6 btn btn-primary btn-lg">
-              Get started with our premium plan &rarr;
+              Subscribe &rarr;
             </button>
           </form>
         </div>
