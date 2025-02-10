@@ -1,107 +1,63 @@
 <!-- filepath: /c:/Users/cooma/Projects/dj_allauth_practice2/proj/accounts/templates/account/signup.html -->
 {% extends 'base.html' %} {% block content %}
 
-<div class="py-12">
-  <div class="p-4">
-    <div
-      class="mx-auto w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700"
-    >
-      <form
-        class="space-y-6"
-        action="{% url 'account_signup' %}"
-        method="post"
-        autocomplete="off"
-      >
-        {% csrf_token %} {% if form.non_field_errors %}
-        <div class="text-red-500">{{ form.non_field_errors }}</div>
-        {% endif %}
-        <h5 class="text-xl font-medium text-gray-900 dark:text-white">
-          Sign up for a new account
-        </h5>
-        <div>
-          <label
-            for="username"
-            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-            >Username</label
-          >
-          <input
-            type="text"
-            name="username"
-            id="username"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-            placeholder="johndoe"
-            required
-            hx-get="{% url 'check_username' %}?username={{ login.value }}"
-            hx-trigger="keyup changed delay:500ms"
-            hx-target="#username-feedback"
-            hx-swap="innerHTML"
-          />
-          <div id="username-feedback"></div>
+<section class="px-4 pb-24 mx-auto max-w-7xl">
+
+  <div class="w-full py-6 mx-auto md:w-3/5 lg:w-2/5">
+    <h1 class="mb-1 text-xl font-medium text-center text-gray-800 md:text-3xl">Create your Free Account</h1>
+    <p class="mb-2 text-sm font-normal text-center text-gray-700 md:text-base">
+      Already have an account?
+      <a href="#" class="text-purple-700 hover:text-purple-900">Sign in</a>
+    </p>
+    <form class="mt-8 space-y-4" action="{% url 'account_signup' %}" method="post" autocomplete="off">
+      {% csrf_token %} {% if form.non_field_errors %}
+      <div class="text-red-500">{{ form.non_field_errors }}</div>
+      {% endif %}
+      <label class="block" for="username">
+        <span class="block mb-1 text-xs font-medium text-gray-700">Username</span>
+        <input class="form-input" type="text" id="username" name="username" placeholder="Username" hx-get="{% url 'check_username' %}?username={{ login.value }}"
+        hx-trigger="keyup changed delay:500ms"
+        hx-target="#username-feedback"
+        hx-swap="innerHTML" required />
+        <div id="username-feedback"></div>
           {% if form.login.errors %}
           <div class="text-red-500">{{ form.login.errors }}</div>
           {% endif %}
-        </div>
-        <div>
-          <label
-            for="email"
-            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-            >Email</label
-          >
-          <input
-            type="email"
-            name="email"
-            id="email"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-            placeholder="johndoe@mail.com"
-            required
-          />
-          {% if form.email.errors %}
-          <div class="text-red-500">{{ form.email.errors }}</div>
-          {% endif %}
-        </div>
-        <div>
-          <label
-            for="password"
-            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-            >Password</label
-          >
-          <input
-            type="password"
-            name="password1"
-            id="password1"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-            required
-          />
-          {% if form.password1.errors %}
-          <div class="text-red-500">{{ form.password1.errors }}</div>
-          {% endif %}
-        </div>
-        <div>
-          <label
-            for="password"
-            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-            >Enter password again</label
-          >
-          <input
-            type="password"
-            name="password2"
-            id="password2"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-            required
-          />
-          {% if form.password2.errors %}
-          <div class="text-red-500">{{ form.password2.errors }}</div>
-          {% endif %}
-        </div>
-        <button
-          type="submit"
-          class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        >
-          Sign up
-        </button>
-      </form>
-    </div>
+      </label>
+      <label class="block" for="email">
+        <span class="block mb-1 text-xs font-medium text-gray-700">Your Email</span>
+        <input class="form-input" type="email" name="email" id="email" placeholder="Ex. james@bond.com" inputmode="email" required />
+        {% if form.email.errors %}
+        <div class="text-red-500">{{ form.email.errors }}</div>
+        {% endif %}
+      </label>
+
+      <label class="block" for="password">
+        <span class="block mb-1 text-xs font-medium text-gray-700">Create a password</span>
+        <input class="form-input" type="password" id="password1" name="password1" placeholder="••••••••" required />
+        {% if form.password1.errors %}
+        <div class="text-red-500">{{ form.password1.errors }}</div>
+        {% endif %}
+      </label>
+
+      <label class="block" for="password">
+        <span class="block mb-1 text-xs font-medium text-gray-700">Repeat password</span>
+        <input class="form-input" type="password" id="password2" name="password2" placeholder="••••••••" required />
+        {% if form.password2.errors %}
+        <div class="text-red-500">{{ form.password2.errors }}</div>
+        {% endif %}
+      </label>
+      <button type="submit" class="w-full btn btn-primary btn-lg">Sign Up</button>
+    </form>
+
+    <p class="my-5 text-xs font-medium text-center text-gray-700">
+      By clicking "Sign Up" you agree to our
+      <a href="#" class="text-purple-700 hover:text-purple-900">Terms of Service</a>
+      and
+      <a href="#" class="text-purple-700 hover:text-purple-900">Privacy Policy</a>.
+    </p>
   </div>
-</div>
+</section>
+
 
 {% endblock %}
