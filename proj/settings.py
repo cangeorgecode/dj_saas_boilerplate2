@@ -8,6 +8,10 @@ load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 BASE_URL = 'http://localhost:8000'
+WAGTAILADMIN_BASE_URL = BASE_URL
+WAGTAILADMIN_BASE_URL = 'http://localhost:8000/wagtail_admin'
+
+WAGTAILDOCS_EXTENSIONS = ['csv', 'docx', 'key', 'odt', 'pdf', 'pptx', 'rtf', 'txt', 'xlsx', 'zip']
 
 
 # Quick-start development settings - unsuitable for production
@@ -40,6 +44,19 @@ INSTALLED_APPS = [
     "django_htmx",
     'allauth.socialaccount',
     'allauth.socialaccount.providers.github',
+    'wagtail.contrib.forms',
+    'wagtail.contrib.redirects',
+    'wagtail.embeds',
+    'wagtail.sites',
+    'wagtail.users',
+    'wagtail.snippets',
+    'wagtail.documents',
+    'wagtail.images',
+    'wagtail.search',
+    'wagtail.admin',
+    'wagtail',
+    'modelcluster',
+    'taggit',
 ]
 
 TAILWIND_APP_NAME = 'theme'
@@ -59,7 +76,12 @@ MIDDLEWARE = [
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "allauth.account.middleware.AccountMiddleware",
     "django_htmx.middleware.HtmxMiddleware",
+    'wagtail.contrib.redirects.middleware.RedirectMiddleware',
 ]
+
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 10_000
+
+WAGTAIL_SITE_NAME = 'Django Boilerplate'
 
 LOGIN_REDIRECT_URL = '/'
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'

@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.timezone import now
+from wagtail.models import Page
+from wagtail.fields import RichTextField
 
 class UserPayment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -47,3 +49,11 @@ class Subscription(models.Model):
 
     def __str__(self):
         return f"{self.user.username} - {self.product_name} - Active: {self.is_active}"
+
+
+
+
+class HomePage(Page):
+    body = RichTextField(blank=True)
+
+    content_panels = Page.content_panels + ["body"]
