@@ -3,6 +3,9 @@ from django.contrib.auth.models import User
 from django.utils.timezone import now
 from dateutil.relativedelta import relativedelta
 
+from wagtail.models import Page
+from wagtail.fields import RichTextField
+
 class Subscription(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     stripe_customer_id = models.CharField(max_length=255)
@@ -47,3 +50,11 @@ class Subscription(models.Model):
         else:
             next_billing_date = None
         return next_billing_date
+
+class HomePage(Page):
+    body = RichTextField(blank=True)
+    tag = RichTextField(blank=True, null=True)
+    created = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    
+
+    content_panels = Page.content_panels + ["body", "tag"]
