@@ -18,86 +18,86 @@
   </head>
 
   <body class="min-h-screen flex flex-col">
-    <nav class="bg-white border-gray-200 dark:bg-gray-900">
-      <div
-        class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
-      >
-        <a
-          href="{% url 'index' %}"
-          class="flex items-center space-x-3 rtl:space-x-reverse"
-        >
+    <header class="z-30 w-full px-2 py-4 bg-white sm:px-4">
+      <div class="flex items-center justify-between mx-auto max-w-7xl">
+        <a href="{% url 'index' %}" title="Django Boilerplate" class="flex items-center">
           <img
             src="{% static 'Your_logo.png' %}"
             class="h-8"
-            alt="Flowbite Logo"
+            alt="Django Boilerplate"
           />
-          <span
-            class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"
-          ></span>
+          <span class="sr-only">Django Boilerplate</span>
         </a>
-        <button
-          data-collapse-toggle="navbar-default"
-          type="button"
-          class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-          aria-controls="navbar-default"
-          aria-expanded="false"
-        >
-          <span class="sr-only">Open main menu</span>
-          <svg
-            class="w-5 h-5"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 17 14"
-          >
-            <path
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M1 1h15M1 7h15M1 13h15"
-            />
-          </svg>
-        </button>
-        <div class="hidden w-full md:block md:w-auto" id="navbar-default">
-          <ul
-            class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700"
-          >
+        <div class="flex items-center space-x-1">
+          <div class="hidden space-x-1 md:inline-flex">
+            <a href="#" class="btn btn-sm btn-white">Features</a>
+            <a href="{% url 'pricing' %}" class="btn btn-sm btn-white">Pricing</a>
+            <a href="#" class="btn btn-sm btn-white">Blog</a>
+            <a href="#" class="btn btn-sm btn-white">Company</a>
             {% if user.is_authenticated %}
-            <li>
-              <a
-                href="{% url 'profile' %}"
-                class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-                >Profile</a
-              >
-            </li>
-            <li>
-              <a
-                href="{% url 'account_logout' %}"
-                class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-                >Logout</a
-              >
-            </li>
+            <a href="{% url 'profile' %}" class="btn btn-sm btn-white">Profile</a>
+            <a href="{% url 'account_logout' %}" class="btn btn-sm btn-white">Logout</a>
             {% else %}
-            <li>
-              <a
-                href="{% url 'account_login' %}"
-                class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-                >Login</a
-              >
-            </li>
-            <li>
-              <a
-                href="{% url 'account_signup' %}"
-                class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-                >Register</a
-              >
-            </li>
+            <a href="{% url 'account_signup' %}" class="btn btn-sm btn-white">Register</a>
+            <a href="{% url 'account_login' %}" class="btn btn-sm btn-white">Sign in</a>
             {% endif %}
-          </ul>
+          </div>
+          <div class="inline-flex md:hidden" x-data="{ open: false }">
+            <button class="flex-none px-2 btn btn-white btn-sm" @click="open = true">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+                class="w-5 h-5"
+              >
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+              </svg>
+              <span class="sr-only">Open Menu</span>
+            </button>
+            <div class="absolute top-0 left-0 right-0 z-50 flex flex-col p-2 pb-4 m-2 space-y-3 bg-white rounded shadow" x-show.transition="open" @click.away="open = false" x-cloak>
+              <button class="self-end flex-none px-2 ml-2 btn btn-white btn-icon" @click="open = false">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+                <span class="sr-only">Close Menu</span>
+              </button>
+              <a href="#" class="w-full btn btn-white">Features</a>
+              <a href="{% url 'pricing' %}" class="w-full btn btn-white">Pricing</a>
+              <a href="#" class="w-full btn btn-white">Blog</a>
+              <a href="#" class="w-full btn btn-white">Company</a>
+              {% if user.is_authenticated %}
+              <a href="{% url 'profile' %}" class="btn btn-sm btn-white">Profile</a>
+              <a href="{% url 'account_logout' %}" class="btn btn-sm btn-white">Logout</a>
+              {% else %}
+              <a href="{% url 'account_signup' %}" class="btn btn-sm btn-white">Register</a>
+              <a href="{% url 'account_login' %}" class="btn btn-sm btn-white">Sign in</a>
+              {% endif %}
+            </div>
+          </div>
         </div>
       </div>
-    </nav>
+    </header>
+    
+  
 
     <div class="flex-grow bg-white">
       {% if messages %} {% for message in messages %}
@@ -161,9 +161,7 @@
         class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between"
       >
         <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400"
-          >© {% now 'Y' %}
-          <a href="https://flowbite.com/" class="hover:underline">Sudo Dev</a>.
-          All Rights Reserved.
+          >Built with 🫶 by <a href="https://x.com/joji_jiji" target="_blank">George</a>
         </span>
       </div>
     </footer>

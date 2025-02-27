@@ -14,6 +14,10 @@ module.exports = {
         14: "3.5rem", // Add custom spacing value
         16: "4rem", // Add custom spacing value
       },
+      backgroundClip: ['text'],
+      backgroundImage: {
+        'gradient-to-r': 'linear-gradient(to right, var(--tw-gradient-stops))',
+      },
     },
   },
   plugins: [

@@ -7,7 +7,7 @@
     <h1 class="mb-1 text-xl font-medium text-center text-gray-800 md:text-3xl">Create your Free Account</h1>
     <p class="mb-2 text-sm font-normal text-center text-gray-700 md:text-base">
       Already have an account?
-      <a href="#" class="text-purple-700 hover:text-purple-900">Sign in</a>
+      <a href="{% url 'account_login' %}" class="text-purple-700 hover:text-purple-900">Sign in</a>
     </p>
     <form class="mt-8 space-y-4" action="{% url 'account_signup' %}" method="post" autocomplete="off">
       {% csrf_token %} {% if form.non_field_errors %}

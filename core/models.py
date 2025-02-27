@@ -50,10 +50,9 @@ class Subscription(models.Model):
     def __str__(self):
         return f"{self.user.username} - {self.product_name} - Active: {self.is_active}"
 
-
-
-
 class HomePage(Page):
     body = RichTextField(blank=True)
+    date = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    tag = RichTextField(blank=True)
 
-    content_panels = Page.content_panels + ["body"]
+    content_panels = Page.content_panels + ["body", "tag"]

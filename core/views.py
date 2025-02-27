@@ -6,8 +6,22 @@ from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 from django.contrib import messages
+import logging
+import os
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
+
+# Configure logging
+log_file_path = os.path.join(settings.BASE_DIR, 'logs', 'app.log')  # Path to the log file
+os.makedirs(os.path.dirname(log_file_path), exist_ok=True)  # Ensure the directory exists
+
+logging.basicConfig(
+    filename=log_file_path,
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s'
+)
+
+logger = logging.getLogger(__name__)
 
 def index(request):
     # Product 1
@@ -139,3 +153,6 @@ def stripe_webhook(request):
         user_payment.save()
 
     return HttpResponse(status=200)
+
+def pricing(request):
+    return render(request, 'core/pricing.html')
