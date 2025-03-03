@@ -17,8 +17,8 @@
     {% block scripts %} {% endblock scripts %}
   </head>
 
-  <body class="min-h-screen flex flex-col">
-    <header class="z-30 w-full px-2 py-4 bg-white sm:px-4">
+  <body class="min-h-screen flex flex-col bg-gray-900">
+    <header class="z-30 w-full px-2 py-4 sm:px-4">
       <div class="flex items-center justify-between mx-auto max-w-7xl">
         <a href="{% url 'index' %}" title="Django Boilerplate" class="flex items-center">
           <img
@@ -30,16 +30,16 @@
         </a>
         <div class="flex items-center space-x-1">
           <div class="hidden space-x-1 md:inline-flex">
-            <a href="#" class="btn btn-sm btn-white">Features</a>
-            <a href="{% url 'pricing' %}" class="btn btn-sm btn-white">Pricing</a>
-            <a href="#" class="btn btn-sm btn-white">Blog</a>
-            <a href="#" class="btn btn-sm btn-white">Company</a>
+            <a href="#" class="text-white bg-pink-700 btn hover:bg-pink-900">Features</a>
+            <a href="{% url 'pricing' %}" class="text-white bg-pink-700 btn hover:bg-pink-900">Pricing</a>
+            <a href="#" class="text-white bg-pink-700 btn hover:bg-pink-900">Blog</a>
+            <a href="#" class="text-white bg-pink-700 btn hover:bg-pink-900">Company</a>
             {% if user.is_authenticated %}
-            <a href="{% url 'profile' %}" class="btn btn-sm btn-white">Profile</a>
-            <a href="{% url 'account_logout' %}" class="btn btn-sm btn-white">Logout</a>
+            <a href="{% url 'profile' %}" class="text-white bg-pink-700 btn hover:bg-pink-900">Profile</a>
+            <a href="{% url 'account_logout' %}" class="text-white bg-pink-700 btn hover:bg-pink-900">Logout</a>
             {% else %}
-            <a href="{% url 'account_signup' %}" class="btn btn-sm btn-white">Register</a>
-            <a href="{% url 'account_login' %}" class="btn btn-sm btn-white">Sign in</a>
+            <a href="{% url 'account_signup' %}" class="text-white bg-pink-700 btn hover:bg-pink-900">Register</a>
+            <a href="{% url 'account_login' %}" class="text-white bg-pink-700 btn hover:bg-pink-900">Sign in</a>
             {% endif %}
           </div>
           <div class="inline-flex md:hidden" x-data="{ open: false }">
@@ -85,11 +85,11 @@
               <a href="#" class="w-full btn btn-white">Blog</a>
               <a href="#" class="w-full btn btn-white">Company</a>
               {% if user.is_authenticated %}
-              <a href="{% url 'profile' %}" class="btn btn-sm btn-white">Profile</a>
-              <a href="{% url 'account_logout' %}" class="btn btn-sm btn-white">Logout</a>
+              <a href="{% url 'profile' %}" class="text-white bg-pink-700 btn hover:bg-pink-900">Profile</a>
+              <a href="{% url 'account_logout' %}" class="text-white bg-pink-700 btn hover:bg-pink-900">Logout</a>
               {% else %}
-              <a href="{% url 'account_signup' %}" class="btn btn-sm btn-white">Register</a>
-              <a href="{% url 'account_login' %}" class="btn btn-sm btn-white">Sign in</a>
+              <a href="{% url 'account_signup' %}" class="text-white bg-pink-700 btn hover:bg-pink-900">Register</a>
+              <a href="{% url 'account_login' %}" class="text-white bg-pink-700 btn hover:bg-pink-900">Sign in</a>
               {% endif %}
             </div>
           </div>
@@ -153,7 +153,11 @@
           </div>
         </div>
       </div>
-      {% endfor %} {% endif %} {% block content %} {% endblock content %}
+      {% endfor %} {% endif %} 
+      
+      <div class="bg-gray-900">
+      {% block content %} {% endblock content %}
+      </div>
     </div>
 
     <footer>
