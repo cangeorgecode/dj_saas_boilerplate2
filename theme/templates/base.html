@@ -7,18 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     {% tailwind_css %}
-    <script
-      defer
-      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
-    ></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="{% static 'htmx.min.js' %}" defer></script>
     <script src="{% static 'kutty.min.js' %}" defer></script>
     <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
     {% block scripts %} {% endblock scripts %}
   </head>
 
-  <body class="min-h-screen flex flex-col">
-    <header class="z-30 w-full px-2 py-4 bg-white sm:px-4">
+  <body class="min-h-screen flex flex-col bg-gray-900">
+    <header class="z-30 w-full px-2 py-4 sm:px-4">
       <div class="flex items-center justify-between mx-auto max-w-7xl">
         <a href="{% url 'index' %}" title="Django Boilerplate" class="flex items-center">
           <img
@@ -29,17 +26,17 @@
           <span class="sr-only">Django Boilerplate</span>
         </a>
         <div class="flex items-center space-x-1">
-          <div class="hidden space-x-1 md:inline-flex">
-            <a href="#" class="btn btn-sm btn-white">Features</a>
-            <a href="{% url 'pricing' %}" class="btn btn-sm btn-white">Pricing</a>
-            <a href="#" class="btn btn-sm btn-white">Blog</a>
-            <a href="#" class="btn btn-sm btn-white">Company</a>
+          <div class="hidden space-x-1 md:inline-flex text-white">
+            <a href="#" class="rounded-full btn btn-link text-white hover:bg-yellow-300 hover:text-gray-800">Features</a>
+            <a href="{% url 'pricing' %}" class="rounded-full btn btn-link text-white hover:bg-yellow-300 hover:text-gray-800">Pricing</a>
+            <a href="#" class="rounded-full btn btn-link text-white hover:bg-yellow-300 hover:text-gray-800">Blog</a>
+            <a href="#" class="rounded-full btn btn-link text-white hover:bg-yellow-300 hover:text-gray-800">Company</a>
             {% if user.is_authenticated %}
-            <a href="{% url 'profile' %}" class="btn btn-sm btn-white">Profile</a>
-            <a href="{% url 'account_logout' %}" class="btn btn-sm btn-white">Logout</a>
+            <a href="{% url 'profile' %}" class="rounded-full btn btn-link text-white hover:bg-yellow-300 hover:text-gray-800">Profile</a>
+            <a href="{% url 'account_logout' %}" class="rounded-full btn btn-link text-white hover:bg-yellow-300 hover:text-gray-800">Logout</a>
             {% else %}
-            <a href="{% url 'account_signup' %}" class="btn btn-sm btn-white">Register</a>
-            <a href="{% url 'account_login' %}" class="btn btn-sm btn-white">Sign in</a>
+            <a href="{% url 'account_signup' %}" class="rounded-full btn btn-link text-white hover:bg-yellow-300 hover:text-gray-800">Register</a>
+            <a href="{% url 'account_login' %}" class="rounded-full btn btn-link text-white hover:bg-yellow-300 hover:text-gray-800">Sign in</a>
             {% endif %}
           </div>
           <div class="inline-flex md:hidden" x-data="{ open: false }">
@@ -85,11 +82,11 @@
               <a href="#" class="w-full btn btn-white">Blog</a>
               <a href="#" class="w-full btn btn-white">Company</a>
               {% if user.is_authenticated %}
-              <a href="{% url 'profile' %}" class="btn btn-sm btn-white">Profile</a>
-              <a href="{% url 'account_logout' %}" class="btn btn-sm btn-white">Logout</a>
+              <a href="{% url 'profile' %}" class="rounded-full btn btn-link text-white hover:bg-yellow-300 hover:text-gray-800">Profile</a>
+              <a href="{% url 'account_logout' %}" class="rounded-full btn btn-link text-white hover:bg-yellow-300 hover:text-gray-800">Logout</a>
               {% else %}
-              <a href="{% url 'account_signup' %}" class="btn btn-sm btn-white">Register</a>
-              <a href="{% url 'account_login' %}" class="btn btn-sm btn-white">Sign in</a>
+              <a href="{% url 'account_signup' %}" class="rounded-full btn btn-link text-white hover:bg-yellow-300 hover:text-gray-800">Register</a>
+              <a href="{% url 'account_login' %}" class="rounded-full btn btn-link text-white hover:bg-yellow-300 hover:text-gray-800">Sign in</a>
               {% endif %}
             </div>
           </div>
@@ -153,7 +150,12 @@
           </div>
         </div>
       </div>
-      {% endfor %} {% endif %} {% block content %} {% endblock content %}
+      {% endfor %} {% endif %} 
+      
+      <div class="bg-gray-900">
+        {% block content %} 
+        {% endblock content %}
+      </div>
     </div>
 
     <footer>
